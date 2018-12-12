@@ -1,4 +1,4 @@
-'use strict'
+
 
 class Node {
   constructor(val, next) {
@@ -7,22 +7,20 @@ class Node {
   }
 }
 
-// let list = new Node(1, new Node(2, new Node(5, new Node(6, null))))
-
-
-///////////////////////////////////
-// L I N K E D  L I S T  C L A S S
-/////////////////////////////////
 
 class LinkedList {
   constructor() {
     this.head = null;
+    this.tail = null;
   }
   
   add(val) {
     let nn = new Node(val);
     nn.next = this.head;
     this.head = nn;
+    if ( this.head.next == null) {
+      this.tail = this.head;
+    }
   }
   
   traverse(fun) {
@@ -53,30 +51,37 @@ class LinkedList {
 }
 
 
-// This stack is using dependency injection from linked list.
-  // Other alternatives include: inheritance, composition and building all functionality instead
-
-class Stack {
-  constructor(store) {
-    this.list = store;
+class Queue {
+  constructor(list){
+    this.list = list;
   }
   
-  push(val) {
-    this.list.add(val);
+  //adds new elements to tail (first in)
+  enqueue (val) {
+    let nn = new Node(val);
+    this.list.tail.next = nn;
+    this.list.tail = nn;
   }
   
-  pop() {
-    let node = this.list.head;
-    this.list.head = node.next;
-    return node.value;
+  //removes from tail (first out)
+  dequeue () {
+    currentHead = this.list.head;
+    this.list.head = currentHead.next;
+    return currentHead.value;
   }
   
-  peek() {
+  peek () {
     this.list.head.value;
   }
   
-  isEmpty() {
-    if ( this.list.head === null ) { return true };
+  isEmpty () {
+    return !this.list.head.value;
   }
 }
 
+q1 = new Queue();
+q1.enqueue('hello');
+q1.enqueue('hola');
+q1.enqueue('hallo');
+q1.enqueue("g'day");
+console.log( q1.peek() );
