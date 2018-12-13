@@ -107,3 +107,16 @@ console.log(h.get('hello'));
 
 
 console.time("Set");
+
+//access whole dictionary of words
+// cat user/dict/dict/words
+
+
+  // use that to create new sets in 
+
+  //change array size - does performance change 
+
+
+ // 1: finish hash and benchmoark
+ // 2: revisit triple it sum, how can hash improve perfomance - get more than O(logn)
+ 
