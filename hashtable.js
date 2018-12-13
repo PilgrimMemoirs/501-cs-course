@@ -1,5 +1,13 @@
 'use strict';
 
+class Node {
+  constructor(val, next) {
+    this.value = val;
+    this.next = next;
+  }
+}
+
+
 class LinkedList {
   constructor() {
     this.head = null;
@@ -43,13 +51,13 @@ class LinkedList {
 class HashList {
   constructor(size) {
     this.bucketSize = size;
-    this.bucket = [];
+    this.buckets = [];
     for (let i=0; i < this.bucketSize; i++) {
       this.buckets.push(new LinkedList());
     }
   }
   
-  findHash() {
+  findHash(key) {
     let hash = 0;
     for (let char of key) {
       hash += char.charCodeAt(0);
@@ -58,16 +66,44 @@ class HashList {
   }
   
   getBucket(key) {
-    this.findHash(key) % this.bucketSize;
+    let index = this.findHash(key) % this.bucketSize;
     return this.buckets[index];
   }
+  
   set(key, val) {
-    this.getBucket(key).add({key, val})
+    let obj = { key, val }
+    this.getBucket(key).traverse( o => { 
+      if ( o.key == key ) {
+        o = obj;
+        obj = null;
+      }
+    });
+    if (obj) {}
+    return true;
   }
   
   get(key) {
-    
+    let obj = null;
+    this.getBucket(key).traverse(o => {if (o.key == key) obj = o });
+    return obj;
   }
   
-  
 }
+
+// benchmark using the console
+console.time("Set")
+
+
+
+
+let h = new HashList(100);
+
+h.set('hello', 'world');
+h.set('d', 'c');
+h.set('b', 'sd');
+h.set('e', 'asssdf');
+h.set('2', 'asdf');
+console.log(h.get('hello'));
+
+
+console.time("Set");
