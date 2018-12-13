@@ -231,9 +231,10 @@ class BinaryTreeNode {
     this.value = value;
   }
   
+  //recursive add function
   add(val) {
-    if (this.val > val) {
-      if (!this.left) this.left.add(val);
+    if ( val < this.value  ) {
+      if (this.left) this.left.add(val);
       else this.left = new BinaryTreeNode(val);
     } else {
       if(this.right) this.right.add(val);
@@ -265,27 +266,32 @@ class BinaryTree {
   }
   
   //should add to left if lower, to right if higher
-  add(val) {
-
-    current = this.root;
-    
-    while ( !current.left && current.right ) {
-      
-      if (val <= current) {
-        if (current.left) {
-          current=current.left
-        } else {
-          current.left = BinaryTreeNode(val);
-        }
-      }
-      
-      
-      if (val > current.right) {
-        
-      }
-    }
-    
-    
+  // add(val) {
+  // 
+  //   current = this.root;
+  // 
+  //   while ( !current.left && current.right ) {
+  // 
+  //     if (val <= current) {
+  //       if (current.left) {
+  //         current=current.left
+  //       } else {
+  //         current.left = BinaryTreeNode(val);
+  //       }
+  //     }
+  // 
+  // 
+  //     if (val > current.right) {
+  // 
+  //     }
+  //   }
+  // 
+  // 
+  // }
+  
+  
+  add (val) {
+    this.root.add(val);
   }
   
   breadthFirstTraversal(cb) {
@@ -302,12 +308,20 @@ class BinaryTree {
 
 let b = new BinaryTree();
 
-b.root.value = "root";
-b.root.left = new BinaryTreeNode("left");
-b.root.right = new BinaryTreeNode("right");
-b.root.left.left = new BinaryTreeNode("left left");
-b.root.left.right = new BinaryTreeNode("left right");
-b.root.right.left = new BinaryTreeNode("right left");
-b.root.right.right = new BinaryTreeNode("right right");
+b.root.value = 100;
+b.add(3);
+b.add(6);
+b.add(1);
+b.add(556);
+b.add(9988);
+// b.root.left = new BinaryTreeNode("left");
+// b.root.right = new BinaryTreeNode("right");
+// b.root.left.left = new BinaryTreeNode("left left");
+// b.root.left.right = new BinaryTreeNode("left right");
+// b.root.right.left = new BinaryTreeNode("right left");
+// b.root.right.right = new BinaryTreeNode("right right");
 
-b.breadthFirstTraversal(console.log);
+b.root.inOrderTraverse(console.log);
+
+// b.breadthFirstTraversal(console.log);
+
