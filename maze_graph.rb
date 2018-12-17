@@ -1,9 +1,14 @@
+
+
 def find_end(key, visited = {})
+  finish = 44
   return puts "exit is at #{key}" if key == finish
   visited[key] = true
   maze[key].each { |k| find_end(k, visited) if !visited[k] }
 end
 
+
+# Adjacency List
 maze = {
   5 => [12],
   9 => [10, 16],
@@ -24,6 +29,8 @@ maze = {
   44 => [37, 51]
 }
 
-finish = 44
-
 find_end(5)
+
+
+# benchmark this
+# could be log(n) if instead of link lists, use binary search tree
